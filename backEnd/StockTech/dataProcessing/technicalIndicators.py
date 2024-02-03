@@ -5,8 +5,6 @@ def fetchData(request):
     req=json.load(request)
     code=req['code']
     dateFrom=req['dateFrom']
-    print(code)
-    print(dateFrom)
     response = requests.get(f"https://www.amarstock.com/data/afe01cd8b512070a/?scrip={code}&cycle=Day1&dtFrom={dateFrom}T05%3A02%3A13.318Z&fbclid=IwAR0qZBhgiqSV6L6xTerlCEsXvVwtaLMaQvTqqMfUmjloMfBO2jocwV95DE8")
     result = json.loads(response.text)
     df=pd.DataFrame(result)

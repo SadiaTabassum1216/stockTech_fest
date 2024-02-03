@@ -8,7 +8,7 @@ class indices:
         self.ds30=DS30
 
 def getIndices():
-    arr = []
+
     response = requests.get(
         "https://www.amarstock.com/data/lastIndexEx")
     response=response.json()

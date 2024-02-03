@@ -35,7 +35,6 @@ def get_bullbear(request):
     neutral=0
     for item2 in item1:
         if(item2['Scrip']==code):
-            print(item2)
             if(item2['Status']=='BULL'):
                 bull=item2['TotalVolume']
             elif(item2['Status']=='BEAR'):

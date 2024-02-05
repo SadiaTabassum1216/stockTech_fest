@@ -14,7 +14,7 @@ export class NewsComponent {
   ngOnInit(): void {
     this.receiveNews();
   }
-
+  
   
   receiveNews(): void {  
     this.NewsService.getNews()

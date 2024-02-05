@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MarketDataService } from 'src/app/services/market-data.service';
 import { company } from 'src/app/services/market-data.service';
 import { Observable, Subject } from 'rxjs';
+
 import { HttpClient } from '@angular/common/http';
 import {
   ApexAxisChartSeries,

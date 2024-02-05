@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
@@ -76,41 +76,31 @@ export class MarketDataService {
   constructor(private http: HttpClient) { }
 
   getMarketData(): Observable<company[]> {
-    return this.http.get<any>(baseUrl);
+    return this.http.get<company[]>(baseUrl);
   }
-
-  getWatchlist(): Observable<any> {
-    return this.http.post<any>('http://localhost:4000/api/selectWatchlist/',{});
-    // throw new Error('Method not implemented.');
-  }
-
-  removeWatchlist(code: string) {
-    return this.http.post<any>('http://localhost:4000/api/deleteWatchlist/',{code:code});
-  }
-  getFinance(code:string): Observable<any> {
-    return this.http.post<any>(baseUrl4,{code:code});
-  }
-
+  
   getSectorWiseData(): Observable<sector> {
-    return this.http.get<any>(baseUrl2);
+    return this.http.get<sector>(baseUrl2);
   }
 
   getIndices(): Observable<index> {
-    return this.http.get<any>(baseUrl1);
+    return this.http.get<index>(baseUrl1);
   }
 
-  getProfile(code:string): Observable<any> {
-    return this.http.post<any>(baseUrl3,{code:code});
-   // return this.http.post(baseUrl3,code);
+  getFinance(code: string): Observable<any> {
+    return this.http.get<any>(`${baseUrl4}?code=${code}`);
   }
-  getBullBear(code:string): Observable<any> {
-    return this.http.post<any>(baseUrl6,{code:code});
-   // return this.http.post(baseUrl3,code);
+  
+  getProfile(code: string): Observable<any> {
+    return this.http.get<any>(`${baseUrl3}?code=${code}`);
   }
-
-  getPrice(code:string,dateFrom:string): Observable<any> {
-    return this.http.post<any>(baseUrl5,{code:code,dateFrom:dateFrom});
-   // return this.http.post(baseUrl3,code);
+  
+  getBullBear(code: string): Observable<any> {
+    return this.http.get<any>(`${baseUrl6}?code=${code}`);
+  }
+  
+  getPrice(code: string, dateFrom: string): Observable<any> {
+    return this.http.get<any>(`${baseUrl5}?code=${code}&dateFrom=${dateFrom}`);
   }
 
 }

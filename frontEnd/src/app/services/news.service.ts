@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 
 
 const baseUrl = 'http://localhost:4000/api/news/';
-const baseUrl2 = 'http://localhost:4000/api/companyNews/';
+const baseUrl2 = 'http://localhost:4000/api/companyNews';
 
 
 @Injectable({
@@ -19,6 +19,6 @@ export class NewsService {
   }
 
   getCompanyNews(code: string, dateFrom: string): Observable<any> {
-    return this.http.get<any>(`${baseUrl2}?code=${code}&dateFrom=${dateFrom}`);
+    return this.http.get<any>(`${baseUrl2}/${code}/${dateFrom}`);
   }
 }

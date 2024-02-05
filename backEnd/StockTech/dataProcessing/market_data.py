@@ -22,9 +22,9 @@ def get_market_data():
 
     return arr
 
-def get_bullbear(request):
-    req=json.load(request)
-    code=req['code']
+def get_bullbear(request, code):
+    # req=json.load(request)
+    # code=req['code']
     response = requests.get(
         "https://www.amarstock.com/top/day/bullbear")
     items=response.json()

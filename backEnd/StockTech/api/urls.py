@@ -5,20 +5,20 @@ from .view import *
 
 urlpatterns = [
     path('marketData/', market_data),
-    path('bullbear/', bullbear),
+    path('bullbear/<str:code>', bullbear),
     path('news/', news),
     path('indices/',indices),
     path('sectorwise/',sectorwise),
-    path('companyprofile/',companyprofile),
-    path('price/',price),
-    path('companyNews/',companyNews),
+    path('companyprofile/<str:code>',companyprofile),
+    path('price/<str:code>/<str:dateFrom>',price),
+    path('companyNews/<str:code>',companyNews),
     path('companyFinance/',companyFinance),
-    path('SMA50/',SMA50),
-    path('EMA50/',EMA50),
-    path('MACD/',MACD),
-    path('STOCH/',STOCH),
-    path('RSI/',RSI),
-    path('BB/',BB),
-    path('predict/',prediction),
+    path('SMA50/<str:code>/<str:dateFrom>',SMA50),
+    path('EMA50/<str:code>/<str:dateFrom>',EMA50),
+    path('MACD/<str:code>/<str:dateFrom>',MACD),
+    path('STOCH/<str:code>/<str:dateFrom>',STOCH),
+    path('RSI/<str:code>/<str:dateFrom>',RSI),
+    path('BB/<str:code>/<str:dateFrom>',BB),
+    path('predict/<str:code>/<str:dateFrom>',prediction)
 
 ]

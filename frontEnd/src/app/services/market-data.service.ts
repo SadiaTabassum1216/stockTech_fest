@@ -3,13 +3,13 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 
-const baseUrl = 'http://localhost:4000/api/marketData';
-const baseUrl1 = 'http://localhost:4000/api/indices';
-const baseUrl2 = 'http://localhost:4000/api/sectorwise';
-const baseUrl3 = 'http://localhost:4000/api/companyprofile/';
+const baseUrl = 'http://localhost:4000/api/marketData/';
+const baseUrl1 = 'http://localhost:4000/api/indices/';
+const baseUrl2 = 'http://localhost:4000/api/sectorwise/';
+const baseUrl3 = 'http://localhost:4000/api/companyprofile';
 const baseUrl4 = 'http://localhost:4000/api/companyFinance/';
-const baseUrl5 = 'http://localhost:4000/api/price/';
-const baseUrl6 = 'http://localhost:4000/api/bullbear/';
+const baseUrl5 = 'http://localhost:4000/api/price';
+const baseUrl6 = 'http://localhost:4000/api/bullbear';
 
 
 
@@ -88,19 +88,19 @@ export class MarketDataService {
   }
 
   getFinance(code: string): Observable<any> {
-    return this.http.get<any>(`${baseUrl4}?code=${code}`);
+    return this.http.get<any>(`${baseUrl4}/${code}`);
   }
   
   getProfile(code: string): Observable<any> {
-    return this.http.get<any>(`${baseUrl3}?code=${code}`);
+    return this.http.get<any>(`${baseUrl3}/${code}`);
   }
   
   getBullBear(code: string): Observable<any> {
-    return this.http.get<any>(`${baseUrl6}?code=${code}`);
+    return this.http.get<any>(`${baseUrl6}/${code}`);
   }
   
   getPrice(code: string, dateFrom: string): Observable<any> {
-    return this.http.get<any>(`${baseUrl5}?code=${code}&dateFrom=${dateFrom}`);
+    return this.http.get<any>(`${baseUrl5}/${code}/${dateFrom}`);
   }
 
 }

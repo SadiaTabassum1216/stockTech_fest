@@ -29,52 +29,52 @@ def news(request):
     return Response(data=get_news())
 
 @api_view(['GET'])
-def bullbear(request):
-    return Response(data=get_bullbear(request))
+def bullbear(request, code):
+    return Response(data=get_bullbear(request, code))
 
 @api_view(['GET'])
-def SMA50(request):
-    return Response(data=getSMA(request))
+def SMA50(request, code, dateFrom):
+    return Response(data=getSMA(request, code, dateFrom))
 
 @api_view(['GET'])
-def EMA50(request):
-    return Response(data=getEMA(request))
+def EMA50(request, code, dateFrom):
+    return Response(data=getEMA(request, code, dateFrom))
 
 @api_view(['GET'])
-def STOCH(request):
-    return Response(data=getSTOCH(request))
+def STOCH(request, code, dateFrom):
+    return Response(data=getSTOCH(request, code, dateFrom))
 
 @api_view(['GET'])
-def MACD(request):
-    return Response(data=getMACD(request))
+def MACD(request, code, dateFrom):
+    return Response(data=getMACD(request, code, dateFrom))
 
 @api_view(['GET'])
-def BB(request):
-    return Response(data=getBB(request))
+def BB(request, code, dateFrom):
+    return Response(data=getBB(request, code, dateFrom))
 
 @api_view(['GET'])
-def RSI(request):
-    return Response(data=getRSI(request))
+def RSI(request, code, dateFrom):
+    return Response(data=getRSI(request, code, dateFrom))
 
 @api_view(['GET'])
 def indices(request):
     return Response(data=getIndices())
 
 @api_view(['GET'])
-def companyprofile(request):
-    return Response(data=getProfile(request))
+def companyprofile(request, code):
+    return Response(data=getProfile(request, code))
 
 @api_view(['GET'])
-def price(request):
-    return Response(data=getPrice(request))
+def price(request, code, dateFrom):
+    return Response(data=getPrice(request, code, dateFrom))
 
 @api_view(['GET'])
-def prediction(request):
-    return Response(data=getPrediction(request))
+def prediction(request, code, dateFrom):
+    return Response(data=getPrediction(request, code, dateFrom))
 
 @api_view(['GET'])
-def companyNews(request):
-    return JsonResponse(data=getCompanyNews(request))
+def companyNews(request, code):
+    return JsonResponse(data=getCompanyNews(request, code))
 
 @api_view(['GET'])
 def companyFinance(request):

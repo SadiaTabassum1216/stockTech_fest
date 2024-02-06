@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TechnicalIndicatorsService } from 'src/app/services/technical-indicators.service';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
+
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -73,7 +75,7 @@ export class Graph2Component implements OnInit{
   public lineGraph7: Partial<ChartOptions> | any;
 
   constructor(private TecIndSer: TechnicalIndicatorsService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute, private location: Location) { }
 
   setYear(){
     let currentYear = this.currentDate.getFullYear();
@@ -82,6 +84,10 @@ export class Graph2Component implements OnInit{
     const month = ('0' + (this.currentDate.getMonth() + 1)).slice(-2);
     const day = ('0' + this.currentDate.getDate()).slice(-2);
     this.dateString = `${year}-${month}-${day}`;
+  }
+
+  goBack(): void {
+    this.location.back(); // Navigate back to the previous page
   }
 
   receiveMACD(): Observable<any> {

@@ -1,4 +1,4 @@
-import { Component, OnInit,OnChanges,Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, SimpleChanges } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { MarketDataService } from 'src/app/services/market-data.service';
 import { TechnicalIndicatorsService } from 'src/app/services/technical-indicators.service';
@@ -33,10 +33,10 @@ export type ChartOptions = {
   stroke: ApexStroke;
   legend: ApexLegend;
 };
-export class news{
-  title:string='';
-  body:string='';
-} 
+export class news {
+  title: string = '';
+  body: string = '';
+}
 @Component({
   selector: 'app-company-profile',
   templateUrl: './company-profile.component.html',
@@ -44,37 +44,36 @@ export class news{
 })
 
 export class CompanyProfileComponent implements OnInit, OnChanges {
-  isAuthenticated:boolean=false;
-  password:string='';
+  isAuthenticated: boolean = false;
+  password: string = '';
   public lineGraph: Partial<ChartOptions> | any;
   public pieChart: Partial<ChartOptions> | any;
   public pieChart2: Partial<ChartOptions> | any;
   public pieChart3: Partial<ChartOptions> | any;
   y: number[] = Array(3).fill(0);
   dtOptions: DataTables.Settings = {};
-  newsData: news[]=[];
+  newsData: news[] = [];
   code: string = '';
   financialData: any;
   basicData: any;
   graphdata: any;
   graphdata2: any;
   graphdata1: any;
-  trading_code: string ='';
+  trading_code: string = '';
   currentDate = new Date();
   currentYear = this.currentDate.getFullYear();
-  dateString :string ='';
+  dateString: string = '';
   myForm!: FormGroup;
-  url='http://localhost:4000/api/getWatchlist/';
 
 
 
   constructor(private MarketDataService: MarketDataService,
-    private TecIndSer:TechnicalIndicatorsService,
+    private TecIndSer: TechnicalIndicatorsService,
     private newsService: NewsService,
     private route: ActivatedRoute,
-    private router:Router,
+    private router: Router,
     private location: Location,
-    private http:HttpClient,) { }
+    private http: HttpClient,) { }
 
   ngOnChanges(changes: SimpleChanges): void {
     this.showData();
@@ -91,19 +90,20 @@ export class CompanyProfileComponent implements OnInit, OnChanges {
     this.route.params.subscribe((params) => {
       this.code = this.route.snapshot.params['code'];
     });
-    console.log(this.code);
+    
     this.showData();
     this.renderPriceGraph();
+    this.renderPieChart();
     this.renderPieChart3();
     this.renderPieChart2();
-    this.renderPieChart();
-    this.receiveNews();
     
-  } 
-  setYear(){
+    this.receiveNews();
+
+  }
+  setYear() {
     let currentYear = this.currentDate.getFullYear();
-    this.currentDate.setFullYear(currentYear-1);
-    const year =this.currentDate.getFullYear();
+    this.currentDate.setFullYear(currentYear - 1);
+    const year = this.currentDate.getFullYear();
     const month = ('0' + (this.currentDate.getMonth() + 1)).slice(-2);
     const day = ('0' + this.currentDate.getDate()).slice(-2);
     this.dateString = `${year}-${month}-${day}`;
@@ -114,7 +114,7 @@ export class CompanyProfileComponent implements OnInit, OnChanges {
   showGraph() {
     const currentUrl = this.location.path();
     this.router.navigate([currentUrl, 'graph']);
-    }
+  }
 
   getData(): Observable<any> {
     return this.MarketDataService.getProfile(this.code);
@@ -133,50 +133,54 @@ export class CompanyProfileComponent implements OnInit, OnChanges {
   }
 
   receiveNews(): void {  
-    this.newsService.getCompanyNews(this.code,this.dateString).subscribe((data)=>{
+    this.newsService.getCompanyNews(this.code).subscribe((data)=>{
           this.newsData = data['news'];
           console.log(this.newsData);       
         });
   }
 
 
-  showData(): void {
-    this.getData()
-      .subscribe({
+
+  showData(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.getData().subscribe({
         next: (res) => {
-          console.log(res);
           this.basicData = res;
+          resolve();
         },
-        error: (e) => console.error(e)
+        error: (e) => {
+          console.error(e);
+          resolve(); // Resolve even if there's an error
+        }
       });
+    });
   }
 
 
 
   receivePrice(): Observable<any> {
-    return this.MarketDataService.getPrice(this.code,this.dateString);
+    return this.MarketDataService.getPrice(this.code, this.dateString);
   }
 
 
   renderPriceGraph(): void {
     this.receivePrice().subscribe((data1) => {
-      const date=data1['date'];
-      const open=data1['open'];
-      const high=data1['high'];
-      const low=data1['low'];
-      const close=data1['close'];
+      const date = data1['date'];
+      const open = data1['open'];
+      const high = data1['high'];
+      const low = data1['low'];
+      const close = data1['close'];
       const data = [];
-    for (let i = 0; i < date.length; i++) {
-      const item = {
-        date: parseInt(date[i]),
-        open: open[i],
-        high: high[i],
-        low: low[i],
-        close: close[i]
-      };
-      data.push(item);
-    }
-    console.log(data);
+      for (let i = 0; i < date.length; i++) {
+        const item = {
+          date: parseInt(date[i]),
+          open: open[i],
+          high: high[i],
+          low: low[i],
+          close: close[i]
+        };
+        data.push(item);
+      }
       this.lineGraph = {
         chart: {
           type: 'candlestick',
@@ -200,127 +204,113 @@ export class CompanyProfileComponent implements OnInit, OnChanges {
             format: 'dd/MM',
           }
         },
-        yaxis: 
-          {
-            labels: {
-              formatter: function(value: number) {
-                return value.toFixed(2);
-              }
+        yaxis:
+        {
+          labels: {
+            formatter: function (value: number) {
+              return value.toFixed(2);
             }
-          },
+          }
+        },
       };
       this.lineGraph.render();
     })
   }
- 
+
 
   renderPieChart(): void {
-    this.getData().subscribe ((data)=> {
-          const categories = ['Institute', 'Foreign', 'Public','Govt','SponsorDirector'];
-          this.graphdata=data;        
-          this.pieChart = {
-            chart: {
-              type: 'pie',
-               width: '55%',
-            },
-            theme: {
-              monochrome: {
-                enabled: true,
-                color: '#255aee',
-               
-              }
-            },
-            series:[this.graphdata.Institute,this.graphdata.Foreign, this.graphdata.Public,this.graphdata.Govt,this.graphdata.SponsorDirector], 
-           labels: categories,            
-          };
-          
-          this.pieChart.render();
+    this.getData().subscribe((data) => {
+      const categories = ['Institute', 'Foreign', 'Public', 'Govt', 'SponsorDirector'];
+      this.graphdata = data;
+      this.pieChart = {
+        chart: {
+          type: 'pie',
+          width: '55%',
         },
-       );
-     }
+        theme: {
+          monochrome: {
+            enabled: true,
+            color: '#255aee',
+
+          }
+        },
+        series: [this.graphdata.Institute, this.graphdata.Foreign, this.graphdata.Public, this.graphdata.Govt, this.graphdata.SponsorDirector],
+        labels: categories,
+      };
+
+      this.pieChart.render();
+    },
+    );
+  }
 
 
   renderPieChart3(): void {
-      this.getData1().subscribe ((data)=> {
-            const categories = ['Bull', 'Bear', 'Neutral'];
-            this.graphdata1=data;        
-            this.pieChart3 = {
-              chart: {
-                type: 'pie',
-                 width: '50%',
-              },
-              theme: {
-                palette: 'palette1' // upto palette10
-              },
-              
-              series:[this.graphdata1.bull,this.graphdata1.bear, this.graphdata1.neutral], 
-             labels: categories,            
-            };
-            this.pieChart3.render();
-          },
-         );
-       }
+    this.getData1().subscribe((data) => {
+      const categories = ['Bull', 'Bear', 'Neutral'];
+      this.graphdata1 = data;
+      this.pieChart3 = {
+        chart: {
+          type: 'pie',
+          width: '50%',
+        },
+        theme: {
+          palette: 'palette1' // upto palette10
+        },
+
+        series: [this.graphdata1.bull, this.graphdata1.bear, this.graphdata1.neutral],
+        labels: categories,
+      };
+      this.pieChart3.render();
+    },
+    );
+  }
 
 
   renderPieChart2(): void {
-      this.getData().subscribe ((data)=> {
-        const categories = ['Authorized Capital: '+this.graphdata.AuthorizedCap, 'Paid Up Capital: '+this.graphdata.PaidUpCap];
-            
-            this.graphdata2=data;
-            
-            this.pieChart2 = {
-              chart: {
-                type: 'pie',
-                 width: '65%',
-             
-              },
-              theme: {
-                palette: 'palette4' // upto palette10
-              },
-              
-              
-              series:[this.graphdata.AuthorizedCap,this.graphdata.PaidUpCap],
-             labels: categories,            
-            };
-            this.pieChart2.render();
-          }
-         );
-       }
+    this.getData().subscribe((data) => {
+      const categories = ['Authorized Capital: ' + this.graphdata.AuthorizedCap, 'Paid Up Capital: ' + this.graphdata.PaidUpCap];
+
+      this.graphdata2 = data;
+
+      this.pieChart2 = {
+        chart: {
+          type: 'pie',
+          width: '65%',
+
+        },
+        theme: {
+          palette: 'palette4' // upto palette10
+        },
+
+
+        series: [this.graphdata.AuthorizedCap, this.graphdata.PaidUpCap],
+        labels: categories,
+      };
+      this.pieChart2.render();
+    }
+    );
+  }
 
 
   renderDataTable(): void {
     this.dtOptions = {
       searching: false,
-      ordering:  false,
-      
+      ordering: false,
+
       columnDefs: [
         { width: '90em', targets: 0 },
         { width: '30em', targets: [1, 2, 3, 4, 5] },
 
       ],
-      
+
       columns: [
-        {title: 'Particulars', data: ''},
-        {title: '2022', data: '2022'},
-        {title: '2021', data: '2021'},
-        {title: '2020', data: '2020'},
-        {title: '2019', data: '2019'}, 
-        {title: '2018', data: '2018'},
+        { title: 'Particulars', data: '' },
+        { title: '2022', data: '2022' },
+        { title: '2021', data: '2021' },
+        { title: '2020', data: '2020' },
+        { title: '2019', data: '2019' },
+        { title: '2018', data: '2018' },
       ],
     };
   }
-
-
-  getBalance():Observable<any>{
-    const url='http://localhost:4000/api/getBalance/'
-    return this.http.post(url,{});
-  }
-  
-  getPassword():Observable<any>{
-    const url='http://localhost:4000/api/getPassword/'
-    return this.http.post(url,{});
-  }
-
-
-
 }

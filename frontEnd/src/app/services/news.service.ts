@@ -18,7 +18,7 @@ export class NewsService {
     return this.http.get<any>(baseUrl);
   }
 
-  getCompanyNews(code: string, dateFrom: string): Observable<any> {
-    return this.http.get<any>(`${baseUrl2}/${code}/${dateFrom}`);
+  getCompanyNews(code: string): Observable<any> {
+    return this.http.get<any>(`${baseUrl2}/${code}`);
   }
 }

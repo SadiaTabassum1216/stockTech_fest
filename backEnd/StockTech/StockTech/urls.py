@@ -22,4 +22,4 @@ urlpatterns = [
     path('api/',include('api.urls'))
 ]
 
-print(api.urls.urlpatterns)
+# print(api.urls.urlpatterns)

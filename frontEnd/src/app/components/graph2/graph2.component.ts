@@ -40,7 +40,6 @@ export class Graph2Component implements OnInit{
   currentYear = this.currentDate.getFullYear();
   dateString :string ='';
   code:string='';
-  isAuthenticated:boolean=false;
 
   rsi: string = "The Relative Strength Index (RSI) is represented on a scale of 0 to 100, the RSI helps traders and investors assess whether an asset is overbought or oversold. Readings above 70 indicate an overbought condition, suggesting a potential downward correction, while readings below 30 indicate an oversold condition, suggesting a potential upward correction.";
   stoch: string = "The Stoch graph consists of two lines, %K and %D, which represent the current closing price relative to the high-low range over a specified period. %K reflects price momentum and %D is a smoothed version of %K. Interpreting the graph involves analyzing the positions of %K and %D. When %K crosses above %D and rises above 20, it indicates a buying opportunity. Conversely, when %K crosses below %D and falls below 80, it suggests a selling opportunity. The graph oscillates between 0 and 100, reflecting potential price movements and overbought/oversold conditions.";
@@ -129,7 +128,7 @@ export class Graph2Component implements OnInit{
         data.push(item);
         
       }
-      console.log(data);
+      // console.log(data);
       this.lineGraph = {
         chart: {
           type: 'line',
@@ -197,7 +196,7 @@ export class Graph2Component implements OnInit{
         data.push(item);
         
       }
-      console.log(data);
+      // console.log(data);
       this.lineGraph6 = {
         chart: {
           // type: 'line',
@@ -257,16 +256,16 @@ export class Graph2Component implements OnInit{
       const date = data1['date'];
       const ema50 = data1['ema50'];
       const ema200 = data1['ema200'];
-      const ema20 = data1['ema20'];
-      const ema100 = data1['ema100'];
+      // const ema20 = data1['ema20'];
+      // const ema100 = data1['ema100'];
       const data = [];
       for (let i = 0; i < date.length; i++) {
         const item = {
           date: parseInt(date[i]),
           ema50: ema50[i],
           ema200: ema200[i],
-          ema20: ema20[i],
-          ema100: ema100[i]
+          // ema20: ema20[i],
+          // ema100: ema100[i]
         };
         data.push(item);
         
@@ -298,20 +297,20 @@ export class Graph2Component implements OnInit{
               y: item.ema200,
             }))
           },
-          {
-            name: 'ema100',
-            data: data.map(item => ({
-              x: new Date(item.date),
-              y: item.ema100,
-            }))
-          },
-          {
-            name: 'ema20',
-            data: data.map(item => ({
-              x: new Date(item.date),
-              y: item.ema20,
-            }))
-          }
+          // {
+          //   name: 'ema100',
+          //   data: data.map(item => ({
+          //     x: new Date(item.date),
+          //     y: item.ema100,
+          //   }))
+          // },
+          // {
+          //   name: 'ema20',
+          //   data: data.map(item => ({
+          //     x: new Date(item.date),
+          //     y: item.ema20,
+          //   }))
+          // }
         ],
        
         xaxis: {
@@ -338,22 +337,20 @@ export class Graph2Component implements OnInit{
       const date = data1['date'];
       const sma50 = data1['sma50'];
       const sma200 = data1['sma200'];
-      const sma20 = data1['sma20'];
-      const sma100 = data1['sma100'];
+      // const sma20 = data1['sma20'];
+      // const sma100 = data1['sma100'];
       const data = [];
       for (let i = 0; i < date.length; i++) {
         const item = {
           date: parseInt(date[i]),
           sma50: sma50[i],
           sma200: sma200[i],
-          sma20: sma20[i],
-          sma100: sma100[i]
+          // sma20: sma20[i],
+          // sma100: sma100[i]
         };
         data.push(item);
         
       }
-      console.log(data);
-      console.log(data);
       this.lineGraph5 = {
         chart: {
           type: 'line',
@@ -380,20 +377,20 @@ export class Graph2Component implements OnInit{
               y: item.sma200,
             }))
           },
-          {
-            name: 'sma20',
-            data: data.map(item => ({
-              x: new Date(item.date),
-              y: item.sma20,
-            }))
-          },
-          {
-            name: 'sma100',
-            data: data.map(item => ({
-              x: new Date(item.date),
-              y: item.sma100,
-            }))
-          },
+          // {
+          //   name: 'sma20',
+          //   data: data.map(item => ({
+          //     x: new Date(item.date),
+          //     y: item.sma20,
+          //   }))
+          // },
+          // {
+          //   name: 'sma100',
+          //   data: data.map(item => ({
+          //     x: new Date(item.date),
+          //     y: item.sma100,
+          //   }))
+          // },
           
           
         ],
@@ -461,7 +458,6 @@ export class Graph2Component implements OnInit{
       const dates = data1['days'];
       const predicted = data1['closing_price'];
       const data = [];
-      console.log(data1);
       for (let i = 0; i < dates.length; i++) {
         const item = {
           date: dates[i],
@@ -470,7 +466,6 @@ export class Graph2Component implements OnInit{
         data.push(item);
       }
       
-      console.log(data);
       this.lineGraph7 = {
         chart: {
           type: 'line',
@@ -527,7 +522,6 @@ export class Graph2Component implements OnInit{
         };
         data.push(item);
       }
-      console.log(data);
       this.lineGraph3 = {
         chart: {
           type: 'line',

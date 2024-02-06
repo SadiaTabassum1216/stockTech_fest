@@ -176,8 +176,7 @@ def getPrediction(request, code, dateFrom):
     
     
     model = load_model(code)
-    print(model)
-
+    
     if model == None:
         print("haha")
         return 0

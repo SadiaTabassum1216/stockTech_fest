@@ -20,7 +20,6 @@ export class NewsComponent {
     this.NewsService.getNews()
       .subscribe({
         next: (res) => {
-          console.log(res);
           this.newsData = res;         
         },
         error: (e) => console.error(e)

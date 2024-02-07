@@ -1,17 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 
-const baseUrl = 'http://localhost:4000/api/MACD';
-const baseUrl2 = 'http://localhost:4000/api/EMA50';
-const baseUrl3 = 'http://localhost:4000/api/SMA50';
-const baseUrl4 = 'http://localhost:4000/api/RSI';
-const baseUrl5 = 'http://localhost:4000/api/STOCH';
-const baseUrl6 = 'http://localhost:4000/api/BB';
-const baseUrl7 = 'http://localhost:4000/api/predict';
-
-
+const baseUrl  = `${environment.apiUrl}/MACD`;
+const baseUrl2 = `${environment.apiUrl}/EMA50`;
+const baseUrl3 = `${environment.apiUrl}/SMA50`;
+const baseUrl4 = `${environment.apiUrl}/RSI`;
+const baseUrl5 = `${environment.apiUrl}/STOCH`;
+const baseUrl6 = `${environment.apiUrl}/BB`;
+const baseUrl7 = `${environment.apiUrl}/predict`;
  
 
 @Injectable({

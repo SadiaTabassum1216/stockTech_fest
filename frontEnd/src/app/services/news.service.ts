@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 
-const baseUrl = 'http://localhost:4000/api/news/';
-const baseUrl2 = 'http://localhost:4000/api/companyNews';
+const baseUrl = `${environment.apiUrl}/news/`;
+const baseUrl2 = `${environment.apiUrl}/companyNews`;
 
 
 @Injectable({

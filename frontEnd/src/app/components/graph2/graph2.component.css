@@ -54,7 +54,7 @@ table {
 }
 
 .back-button {
-  background-color: #021b36; /* Button background color */
+  background-color: #2d1e61; /* Button background color */
   color: #fff; /* Text color */
   border: none; /* Remove button border */
   padding: 5px; /* Add padding */
@@ -64,7 +64,7 @@ table {
 }
 
 .back-button:hover {
-  background-color: #23374d; /* Change background color on hover */
+  background-color: #48319b; /* Change background color on hover */
 }
 
 /* Style the icon */

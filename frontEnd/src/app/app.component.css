@@ -7,6 +7,14 @@
   body{
     background-color: #fff;
   }
+
+  .custom-hover {
+    transition: transform 0.3s;
+}
+
+.custom-hover:hover {
+    transform: scale(1.1);
+}
   
   .logo-image {
     width: 170px;

@@ -119,7 +119,9 @@ def getFutureDates(n):
 
 def getPredictions(model, np_array, scaler, scaled_data, n):
     predictions = []
+    print(model(np_array))
     for i in range(n):
+        print(i)
         prediction = np.reshape(model(np_array), (1, 2)) 
 
         scaled_data = np.append(scaled_data, prediction)
@@ -174,12 +176,14 @@ def getPrediction(request, code, dateFrom):
     
     np_array, scaled_data = jsonTOArray(last_100_days, scaler)
     
-    
+    # print(np_array)
     model = load_model(code)
     
     if model == None:
         print("haha")
         return 0
+    
+    print("hohooooooooooo")
     closing_price, obv, days, sigPriceBuy, sigPriceSell, obv_ema = getPredictions(model, np_array, scaler, scaled_data,
                                                                                   n)
 

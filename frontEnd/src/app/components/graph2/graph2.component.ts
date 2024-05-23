@@ -171,7 +171,10 @@ export class Graph2Component implements OnInit{
           type: 'datetime',
           labels: {
             format: 'dd/MM',
-          }
+          },
+          title: {
+            text: 'Date',
+          },
         },
         yaxis: 
           {
@@ -179,7 +182,10 @@ export class Graph2Component implements OnInit{
               formatter: function(value: number) {
                 return value.toFixed(2);
               }
-            }
+            },
+            title: {
+              text: 'Price',
+            },
           },
       };
 
@@ -242,14 +248,20 @@ export class Graph2Component implements OnInit{
           type: 'datetime',
           labels: {
             format: 'dd/MM',
-          }
+          },
+          title: {
+            text: 'Date',
+          },
         },
         yaxis: {
           labels: {
             formatter: function(value: number) {
               return value.toFixed(2);
             }
-          }
+          },
+          title: {
+            text: 'Price',
+          },
         },
       };
 
@@ -323,14 +335,20 @@ export class Graph2Component implements OnInit{
           type: 'datetime',
           labels: {
             format: 'dd/MM',
-          }
+          },
+          title: {
+            text: 'Date',
+          },
         },
         yaxis:  {
           labels: {
             formatter: function(value: number) {
               return value.toFixed(2);
             }
-          }
+          },
+          title: {
+            text: 'Price',
+          },
         },
       };
 
@@ -405,14 +423,20 @@ export class Graph2Component implements OnInit{
           type: 'datetime',
           labels: {
             format: 'dd/MM',
-          }
+          },
+          title: {
+            text: 'Date',
+          },
         },
         yaxis: {
           labels: {
             formatter: function(value: number) {
               return value.toFixed(2);
             }
-          }
+          },
+          title: {
+            text: 'Price',
+          },
         },
       };
 
@@ -444,14 +468,20 @@ export class Graph2Component implements OnInit{
           type: 'datetime',
           labels: {
             format: 'dd/MM',
-          }
+          },
+          title: {
+            text: 'Date',
+          },
         },
         yaxis: {
           labels: {
             formatter: function(value: number) {
               return value.toFixed(2);
             }
-          }
+          },
+          title: {
+            text: 'Price',
+          },
         },
       };
       this.lineGraph2.render();
@@ -498,6 +528,9 @@ export class Graph2Component implements OnInit{
           labels: {
             format: 'dd/MM',
           },
+          title: {
+            text: 'Date',
+          },
           enabled:false
         },
         yaxis: {
@@ -505,7 +538,10 @@ export class Graph2Component implements OnInit{
             formatter: function(value: number) {
               return value.toFixed(2);
             }
-          }
+          },
+          title: {
+            text: 'Price',
+          },
         },
       };
       this.lineGraph7.render();
@@ -567,14 +603,20 @@ export class Graph2Component implements OnInit{
           type: 'datetime',
           labels: {
             format: 'dd/MM',
-          }
+          },
+          title: {
+            text: 'Date',
+          },
         },
         yaxis: {
           labels: {
             formatter: function(value: number) {
               return value.toFixed(2);
             }
-          }
+          },
+          title: {
+            text: 'Price',
+          },
         },
       };
 
